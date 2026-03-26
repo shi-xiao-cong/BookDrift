@@ -1,25 +1,25 @@
-# 使用 Java 17 基础镜像
-FROM openjdk:17-jdk-slim
+# 使用 Eclipse Temurin Java 17 基础镜像
+FROM eclipse-temurin:17-jdk-alpine
 
 # 设置工作目录
 WORKDIR /app
 
-# 复制 Maven 构建文件
+# 复制 Maven 包装器和配置
 COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
 
-# 下载依赖
+# 设置执行权限并下载依赖
 RUN chmod +x mvnw
 RUN ./mvnw dependency:go-offline -B
 
 # 复制源代码
 COPY src src
 
-# 打包应用
-RUN ./mvnw clean package -DskipTests
+# 打包应用（跳过测试）
+RUN ./mvnw clean package -DskipTests -Dmaven.test.skip=true
 
-# 复制生成的 jar 包
+# 复制生成的 JAR 文件
 RUN cp target/*.jar app.jar
 
 # 暴露端口
