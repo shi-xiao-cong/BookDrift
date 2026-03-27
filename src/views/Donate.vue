@@ -485,7 +485,7 @@ const submitBookInfo = () => {
   
   console.log('当前用户ID:', userId)
   
-  axios.post('http://localhost:10011/api/books/donate', {
+  axios.post(`${apiBaseUrl}/books/donate`, {
     title: bookForm.value.title,
     author: bookForm.value.author,
     donorName: bookForm.value.donor,

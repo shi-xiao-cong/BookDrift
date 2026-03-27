@@ -308,7 +308,7 @@ export default {
         email: ''
       },
       borrowedBooks: [],
-      apiBaseUrl: 'import.meta.env.VITE_API_BASE_URL',
+      apiBaseUrl: import.meta.env.VITE_API_BASE_URL,
       themes: [
         {
           value: 'default',

@@ -132,7 +132,7 @@ export default {
       loading: false,
       showScrollTop: false,
       showMobileMenu: false,
-      apiBaseUrl: 'import.meta.env.VITE_API_BASE_URL'
+      apiBaseUrl: import.meta.env.VITE_API_BASE_URL
     }
   },
   computed: {

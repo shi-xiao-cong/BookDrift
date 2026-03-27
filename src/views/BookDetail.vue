@@ -186,7 +186,7 @@ export default {
       sortOrder: 'desc',
       newNote: '',
       chart: null,
-      apiBaseUrl: 'import.meta.env.VITE_API_BASE_URL',
+      apiBaseUrl: import.meta.env.VITE_API_BASE_URL,
       currentUser: null,
       handleResize: null,
       currentUserAvatar:''

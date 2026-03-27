@@ -614,7 +614,7 @@ const verifyBook = async (bookTitle, bookId) => {
     console.log('当前用户ID:', userId)
     
     // 获取当前用户的借阅记录
-    const response = await axios.get(`http://localhost:10011/api/borrow/current/user/${userId}`)
+    const response = await axios.get(`${apiBaseUrl}/borrow/current/user/${userId}`)
     console.log('借阅记录响应:', response.data)
     
     if (response.data.success && Array.isArray(response.data.data)) {
@@ -709,7 +709,7 @@ const confirmReturnBook = async () => {
   returning.value = true
   
   try {
-    const response = await axios.post(`http://localhost:10011/api/borrow/return/${bookInfo.value.id}`)
+    const response = await axios.post(`${apiBaseUrl}/borrow/return/${bookInfo.value.id}`)
     console.log('归还响应:', response.data)
     
     if (response.data.success) {

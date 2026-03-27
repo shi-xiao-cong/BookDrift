@@ -109,7 +109,7 @@ export default {
       allMedals: [],
       loading: true,
       error: null,
-      apiBaseUrl: 'import.meta.env.VITE_API_BASE_URL'  // 使用代理路径
+      apiBaseUrl: import.meta.env.VITE_API_BASE_URL  // 使用代理路径
     }
   },
   computed: {
