@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // 创建 axios 实例
 const request = axios.create({
-  baseURL: 'https://bookdrift-production.up.railway.app/api',  // 基础路径
+  baseURL: '',  // 使用空字符串，让请求走代理
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json'
