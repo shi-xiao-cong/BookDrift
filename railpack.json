@@ -1,0 +1,9 @@
+{
+  "builders": {
+    "node": {
+      "version": "20",
+      "install": "npm install",
+      "build": "npm run build"
+    }
+  }
+}
