@@ -2,7 +2,7 @@
   <div class="user-center" :class="themeClass">
     <div class="back-nav">
       <router-link to="/" class="back-link">
-        <span class="back-arrow">�?/span> 返回首页
+        <span class="back-arrow">←</span> 返回首页
       </router-link>
     </div>
     
@@ -35,7 +35,7 @@
           <span class="value">{{ userInfo.name || '张三' }}</span>
         </div>
         <div class="info-item">
-          <span class="label">手机�?</span>
+          <span class="label">手机号:</span>
           <span class="value">{{ userInfo.phone || '13800138000' }}</span>
         </div>
         <div class="info-item">
@@ -49,10 +49,10 @@
         </div>
       </div>
       <div class="qrcode-section">
-        <h3>用户专属二维�?/h3>
+        <h3>用户专属二维码</h3>
         <div class="qrcode-container">
-          <img :src="qrcodeUrl" alt="用户专属二维�? class="user-qrcode">
-          <p class="qrcode-hint">用于认领和还书操�?/p>
+          <img :src="qrcodeUrl" alt="用户专属二维码" class="user-qrcode">
+          <p class="qrcode-hint">用于认领和还书操作</p>
         </div>
       </div>
     </div>
@@ -66,34 +66,34 @@
         <div class="modal-body">
           <div class="form-group">
             <label>姓名 <span class="required">*</span></label>
-            <input type="text" v-model="editForm.name" placeholder="请输入姓�?>
+            <input type="text" v-model="editForm.name" placeholder="请输入姓名">
           </div>
           <div class="form-group">
-            <label>手机�?/label>
-            <input type="tel" v-model="editForm.phone" placeholder="请输�?1位手机号" 
+            <label>手机号</label>
+            <input type="tel" v-model="editForm.phone" placeholder="请输入11位手机号" 
             maxlength="11" 
             @input="validatePhone(editForm.phone)"
             @blur="validatePhone(editForm.phone)">
             <span v-if="phoneError" class="error-hint">{{ phoneError }}</span>
             <span v-else-if="editForm.phone && editForm.phone.length > 0 
-            && editForm.phone.length === 11 && !phoneError" class="success-hint">�?手机号格式正�?/span>
+            && editForm.phone.length === 11 && !phoneError" class="success-hint">✓ 手机号格式正确</span>
             <span v-else-if="editForm.phone && editForm.phone.length < 11 
             && editForm.phone.length > 0" class="warning-hint">还需输入
-             {{ 11 - editForm.phone.length }} �?/span>
+             {{ 11 - editForm.phone.length }} 位</span>
           </div>
           <div class="form-group">
             <label>邮箱</label>
-            <input type="email" v-model="editForm.email" placeholder="请输入邮�?
+            <input type="email" v-model="editForm.email" placeholder="请输入邮箱"
             @input="validateEmail(editForm.email)"
             @blur="validateEmail(editForm.email)">
             <span v-if="emailError" class="error-hint">{{ emailError }}</span>
-            <span v-else-if="editForm.email && !emailError" class="success-hint">�?邮箱格式正确</span>
+            <span v-else-if="editForm.email && !emailError" class="success-hint">✓ 邮箱格式正确</span>
           </div>
         </div>
         <div class="modal-footer">
           <button class="btn-cancel" @click="closeEditInfoDialog">取消</button>
           <button class="btn-save" @click="saveUserInfo" :disabled="saving">
-            {{ saving ? '保存�?..' : '保存' }}
+            {{ saving ? '保存中...' : '保存' }}
           </button>
         </div>
       </div>
@@ -108,31 +108,31 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label>原密�?<span class="required">*</span></label>
+            <label>原密码 <span class="required">*</span></label>
             <input type="password" v-model="pwdForm.oldPassword" placeholder="请输入原密码">
           </div>
           <div class="form-group">
-            <label>新密�?<span class="required">*</span></label>
-            <input type="password" v-model="pwdForm.newPassword" placeholder="请输入新密码（至�?位）"
+            <label>新密码 <span class="required">*</span></label>
+            <input type="password" v-model="pwdForm.newPassword" placeholder="请输入新密码（至少6位）"
             @input="validateNewPassword"
             @blur="validateNewPassword">
             <span v-if="pwdError" class="error-hint">{{ pwdError }}</span>
-            <span v-else-if="pwdForm.newPassword && pwdForm.newPassword.length < 6 && pwdForm.newPassword.length > 0" class="warning-hint">还需输入 {{ 6 - pwdForm.newPassword.length }} �?/span>
-        <span v-else-if="pwdForm.newPassword && pwdForm.newPassword.length >= 6" class="success-hint">�?密码强度足够</span>
+            <span v-else-if="pwdForm.newPassword && pwdForm.newPassword.length < 6 && pwdForm.newPassword.length > 0" class="warning-hint">还需输入 {{ 6 - pwdForm.newPassword.length }} 位</span>
+        <span v-else-if="pwdForm.newPassword && pwdForm.newPassword.length >= 6" class="success-hint">✓ 密码强度足够</span>
           </div>
           <div class="form-group">
-            <label>确认新密�?<span class="required">*</span></label>
+            <label>确认新密码 <span class="required">*</span></label>
             <input type="password" v-model="pwdForm.confirmPassword" placeholder="请再次输入新密码"
             @input="validateConfirmPassword"
             @blur="validateConfirmPassword">
             <span v-if="confirmPwdError" class="error-hint">{{ confirmPwdError }}</span>
-        <span v-else-if="pwdForm.confirmPassword && pwdForm.newPassword === pwdForm.confirmPassword" class="success-hint">�?密码一�?/span>
+        <span v-else-if="pwdForm.confirmPassword && pwdForm.newPassword === pwdForm.confirmPassword" class="success-hint">✓ 密码一致</span>
           </div>
         </div>
         <div class="modal-footer">
           <button class="btn-cancel" @click="closeChangePwdDialog">取消</button>
           <button class="btn-save" @click="saveNewPassword" :disabled="changingPwd">
-            {{ changingPwd ? '修改�?..' : '确认修改' }}
+            {{ changingPwd ? '修改中...' : '确认修改' }}
           </button>
         </div>
       </div>
@@ -166,20 +166,20 @@
         <h3>我的勋章 ({{ unlockedMedals.length }})</h3>
         <router-link to="/medal-wall" class="view-all-link">
           查看全部勋章
-          <span class="arrow-icon">�?/span>
+          <span class="arrow-icon">→</span>
         </router-link>
       </div>
       
-      <!-- 加载状�?-->
+      <!-- 加载状态 -->
       <div v-if="medalsLoading" class="loading-state glass-card">
         <div class="loading-spinner"></div>
-        <p>加载勋章�?..</p>
+        <p>加载勋章中...</p>
       </div>
       
       <!-- 勋章列表 -->
       <div v-else class="medal-grid">
         <div v-if="unlockedMedals.length === 0" class="empty-medals glass-card">
-          <p>暂无已解锁勋�?/p>
+          <p>暂无已解锁勋章</p>
           <p class="empty-hint">完成相应任务即可获得勋章</p>
         </div>
         <div v-else v-for="medal in unlockedMedals" :key="medal.id" class="medal-item glass-card" @click="showMedalDetail(medal)">
@@ -188,7 +188,7 @@
           </div>
           <div class="medal-name">{{ medal.name }}</div>
           <div class="medal-desc">{{ medal.description }}</div>
-          <!-- 显示进度（如果是未完成的勋章�?-->
+          <!-- 显示进度（如果是未完成的勋章） -->
           <div v-if="medal.current < medal.required" class="medal-progress">
             <div class="progress-bar">
               <div class="progress-fill" :style="{ width: medal.progress + '%' }"></div>
@@ -217,7 +217,7 @@
           <!-- 书籍信息 -->
           <div class="book-info">
             <h4>{{ book.bookTitle || '未知书名' }}</h4>
-            <p class="book-author">{{ book.bookAuthor || '未知作�? }}</p>
+            <p class="book-author">{{ book.bookAuthor || '未知作者' }}</p>
             <p class="borrow-date">借阅日期：{{ formatDate(book.borrowDate) }}</p>
             <p class="due-date">应还日期：{{ formatDate(book.dueDate) }}</p>
           </div>
@@ -251,7 +251,7 @@
             </div>
           </div>
 
-          <!-- 进度�?-->
+          <!-- 进度条 -->
           <div class="progress-section">
             <div class="progress-info">
               <span>当前进度</span>
@@ -262,16 +262,16 @@
             </div>
           </div>
 
-          <!-- 解锁状�?-->
+          <!-- 解锁状态 -->
           <div class="status-section">
             <div class="status-badge" :class="{ 'unlocked': selectedMedal.unlocked, 'locked': !selectedMedal.unlocked }">
-              {{ selectedMedal.unlocked ? '已解�? : '未解�? }}
+              {{ selectedMedal.unlocked ? '已解锁' : '未解锁' }}
             </div>
             <div v-if="!selectedMedal.unlocked" class="hint-text">
               还需 {{ selectedMedal.required - selectedMedal.current }} {{ getUnit(selectedMedal.type) }} 即可解锁
             </div>
             <div v-else class="unlock-time">
-              解锁�? {{ formatDate(selectedMedal.unlockedAt) }}
+              解锁于: {{ formatDate(selectedMedal.unlockedAt) }}
             </div>
           </div>
         </div>
@@ -317,27 +317,27 @@ export default {
         },
         {
           value: 'green',
-          name: '青灰�?,
+          name: '青灰色',
           gradient: 'linear-gradient(135deg, #dbdbdb 0%, #2f6e62 100%)'
         },
         {
           value: 'blue',
-          name: '海洋�?,
+          name: '海洋蓝',
           gradient: 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)'
         },
         {
           value: 'orange',
-          name: '温暖�?,
+          name: '温暖橙',
           gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
         },
         {
           value: 'pink',
-          name: '浪漫�?,
+          name: '浪漫粉',
           gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
         },
         {
           value: 'purple',
-          name: '梦幻�?,
+          name: '梦幻紫',
           gradient: 'linear-gradient(135deg, #5f2c82 0%, #49a09d 100%)'
         }
       ],
@@ -369,7 +369,7 @@ export default {
     unlockedMedals() {
       console.log('medals数组:', this.medals);
       const unlocked = this.medals.filter(medal => medal.unlocked === true);
-      console.log('过滤后的已解锁勋�?', unlocked);
+      console.log('过滤后的已解锁勋章:', unlocked);
       return unlocked;
     },
     themeClass() {
@@ -383,7 +383,8 @@ export default {
     // 获取头像
     await this.fetchUserAvatar();
     
-    // 从本地存储加载主�?    const savedTheme = localStorage.getItem('userCenterTheme')
+    // 从本地存储加载主题
+    const savedTheme = localStorage.getItem('userCenterTheme')
     if (savedTheme) {
       this.currentTheme = savedTheme
     }
@@ -391,7 +392,8 @@ export default {
     // 监听统计信息更新事件
     window.addEventListener('stats-updated', this.handleStatsUpdated);
 
-    // 添加对借阅更新事件的监�?    window.addEventListener('borrowed-books-updated', this.handleBorrowedBooksUpdated);
+    // 添加对借阅更新事件的监听
+    window.addEventListener('borrowed-books-updated', this.handleBorrowedBooksUpdated);
     
     // 点击其他地方关闭主题面板
     document.addEventListener('click', this.handleClickOutside);
@@ -475,12 +477,14 @@ export default {
       const file = event.target.files[0];
       if (!file) return;
       
-      // 检查文件大小（限制�?MB�?      if (file.size > 2 * 1024 * 1024) {
+      // 检查文件大小（限制为2MB）
+      if (file.size > 2 * 1024 * 1024) {
         alert('图片大小不能超过2MB');
         return;
       }
       
-      // 检查图片格�?      if (!file.type.startsWith('image/')) {
+      // 检查图片格式
+      if (!file.type.startsWith('image/')) {
         alert('请选择图片文件');
         return;
       }
@@ -503,7 +507,7 @@ export default {
           body: formData
         });
         
-        console.log('上传响应状�?', response.status);
+        console.log('上传响应状态:', response.status);
         
         if (!response.ok) {
           throw new Error(`HTTP错误: ${response.status}`);
@@ -536,8 +540,9 @@ export default {
       const userId = this.getCurrentUserId();
       const token = localStorage.getItem('token');
       
-      // 只重新获取统计信息，不重新获取勋章数�?      await this.fetchUserStats(userId, token);
-      console.log('统计信息已刷�?);
+      // 只重新获取统计信息，不重新获取勋章数据
+      await this.fetchUserStats(userId, token);
+      console.log('统计信息已刷新');
     },
     
     async fetchUserData() {
@@ -546,7 +551,7 @@ export default {
         const userId = this.getCurrentUserId();
         const token = localStorage.getItem('token');
         
-        console.log('===== 开始获取用户数�?=====');
+        console.log('===== 开始获取用户数据 =====');
         console.log('用户ID:', userId);
         
         // 1. 获取勋章数据
@@ -567,7 +572,8 @@ export default {
       }
     },
     
-    // 专门获取勋章数据的方�?    async fetchMedals(userId, token) {
+    // 专门获取勋章数据的方法
+    async fetchMedals(userId, token) {
       try {
         const medalsResponse = await fetch(`${this.apiBaseUrl}/medals/${userId}`, {
           headers: {
@@ -584,7 +590,7 @@ export default {
             const firstItem = medalsData.data[0];
             
             if (firstItem.medal) {
-              // �?medal 嵌套
+              // 有 medal 嵌套
               this.medals = medalsData.data.map(item => ({
                 id: item.medal.id,
                 name: item.medal.name,
@@ -598,7 +604,8 @@ export default {
                 unlockedAt: item.unlockedAt
               }));
             } else {
-              // 直接是勋章对�?              this.medals = medalsData.data.map(item => ({
+              // 直接是勋章对象
+              this.medals = medalsData.data.map(item => ({
                 id: item.id,
                 name: item.name,
                 description: item.description,
@@ -615,7 +622,7 @@ export default {
             this.medals = [];
           }
         } else {
-          console.error('获取勋章失败，使用模拟数�?);
+          console.error('获取勋章失败，使用模拟数据');
           this.useMockMedals();
         }
       } catch (error) {
@@ -624,9 +631,10 @@ export default {
       }
     },
     
-    // 专门获取统计信息的方�?    async fetchUserStats(userId, token) {
+    // 专门获取统计信息的方法
+    async fetchUserStats(userId, token) {
       try {
-        console.log('开始获取统计信�? userId:', userId);
+        console.log('开始获取统计信息, userId:', userId);
         console.log('请求URL:', `${this.apiBaseUrl}/statistics/${userId}`);
         
         const statsResponse = await fetch(`${this.apiBaseUrl}/statistics/${userId}`, {
@@ -635,7 +643,7 @@ export default {
           }
         });
         
-        console.log('统计信息响应状�?', statsResponse.status);
+        console.log('统计信息响应状态:', statsResponse.status);
         
         const statsData = await statsResponse.json();
         console.log('统计信息原始数据:', statsData);
@@ -644,7 +652,7 @@ export default {
           this.userStats = statsData.data;
           console.log('统计信息更新成功:', this.userStats);
         } else {
-          console.log('统计信息获取失败，使用模拟数�?);
+          console.log('统计信息获取失败，使用模拟数据');
           this.useMockStats();
         }
       } catch (error) {
@@ -672,11 +680,12 @@ export default {
         console.log('原始返回数据:', data);
         
         if (data.success && Array.isArray(data.data)) {
-          // 正确映射所有字�?          this.borrowedBooks = data.data.map(record => ({
+          // 正确映射所有字段
+          this.borrowedBooks = data.data.map(record => ({
             id: record.id,
             bookId: record.bookId,
             bookTitle: record.bookTitle || '未知书名',
-            bookAuthor: record.bookAuthor || '未知作�?,
+            bookAuthor: record.bookAuthor || '未知作者',
             bookCover: record.bookCover || '',
             borrowDate: record.borrowDate,
             dueDate: record.dueDate
@@ -692,11 +701,12 @@ export default {
       }
     },
     
-    // 格式化日�?    formatDate(dateStr) {
+    // 格式化日期
+    formatDate(dateStr) {
       if (!dateStr) return '未知日期';
       try {
         const date = new Date(dateStr);
-        // 转换为本地日期格�?YYYY/MM/DD
+        // 转换为本地日期格式 YYYY/MM/DD
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0');
@@ -746,7 +756,7 @@ export default {
         },
         {
           id: 4,
-          name: '阅读爱好�?,
+          name: '阅读爱好者',
           description: '借阅10本书',
           icon: '📖',
           type: 'borrow',
@@ -757,8 +767,8 @@ export default {
         },
         {
           id: 5,
-          name: '笔记分享�?,
-          description: '分享5篇笔�?,
+          name: '笔记分享者',
+          description: '分享5篇笔记',
           icon: '✍️',
           type: 'note',
           required: 5,
@@ -826,7 +836,7 @@ export default {
         const userData = `studentId=${userInfo.studentId}&name=${encodeURIComponent(userInfo.name)}&phone=${userInfo.phone}&action=user`;
         this.qrcodeUrl = await QRCode.toDataURL(userData);
       } catch (error) {
-        console.error('生成二维码失�?', error);
+        console.error('生成二维码失败:', error);
       }
     },
     
@@ -858,7 +868,7 @@ export default {
           }
         });
         
-        console.log('归还响应状�?', response.status);
+        console.log('归还响应状态:', response.status);
         const data = await response.json();
         console.log('归还响应数据:', data);
         
@@ -890,16 +900,16 @@ export default {
         borrow: '阅读书籍',
         note: '发布笔记'
       };
-      return `${typeMap[medal.type] || '完成'}数量达到 ${medal.required} �?条`;
+      return `${typeMap[medal.type] || '完成'}数量达到 ${medal.required} 本/条`;
     },
     
     getUnit(type) {
       const unitMap = {
-        donation: '�?,
-        borrow: '�?,
-        note: '�?
+        donation: '本',
+        borrow: '本',
+        note: '条'
       };
-      return unitMap[type] || '�?;
+      return unitMap[type] || '个';
     },
     // 打开编辑信息弹窗
   openEditInfoDialog() {
@@ -919,7 +929,8 @@ export default {
     this.editForm = { name: '', phone: '', email: '' }
   },
   
-  // 验证手机�?  validatePhone(phone) {
+  // 验证手机号
+  validatePhone(phone) {
     if (!phone) return true
     const phoneRegex = /^1[3-9]\d{9}$/
     if (!phoneRegex.test(phone)) {
@@ -935,7 +946,7 @@ export default {
     if (!email) return true
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
-      this.emailError = '邮箱格式不正�?
+      this.emailError = '邮箱格式不正确'
       return false
     }
     this.emailError = ''
@@ -946,11 +957,12 @@ export default {
   async saveUserInfo() {
     // 验证姓名
     if (!this.editForm.name || this.editForm.name.trim().length < 2) {
-      alert('姓名至少2个字�?)
+      alert('姓名至少2个字符')
       return
     }
     
-    // 验证手机�?    if (this.editForm.phone && !this.validatePhone(this.editForm.phone)) {
+    // 验证手机号
+    if (this.editForm.phone && !this.validatePhone(this.editForm.phone)) {
       return
     }
     
@@ -1019,24 +1031,27 @@ export default {
     this.changePwdDialogVisible = false
   },
   
-  // 保存新密�?  async saveNewPassword() {
-    // 验证原密�?    if (!this.pwdForm.oldPassword) {
+  // 保存新密码
+  async saveNewPassword() {
+    // 验证原密码
+    if (!this.pwdForm.oldPassword) {
       this.pwdError = '请输入原密码'
       return
     }
     
-    // 验证新密�?    if (!this.pwdForm.newPassword) {
+    // 验证新密码
+    if (!this.pwdForm.newPassword) {
       this.pwdError = '请输入新密码'
       return
     }
     if (this.pwdForm.newPassword.length < 6) {
-      this.pwdError = '新密码长度至�?�?
+      this.pwdError = '新密码长度至少6位'
       return
     }
     
     // 验证确认密码
     if (this.pwdForm.newPassword !== this.pwdForm.confirmPassword) {
-      this.pwdError = '两次输入的密码不一�?
+      this.pwdError = '两次输入的密码不一致'
       return
     }
     
@@ -1065,7 +1080,8 @@ export default {
         alert('密码修改成功，请重新登录')
         this.closeChangePwdDialog()
         
-        // 退出登�?        localStorage.removeItem('userInfo')
+        // 退出登录
+        localStorage.removeItem('userInfo')
         localStorage.removeItem('token')
         this.$router.push('/login')
       } else {
@@ -1079,17 +1095,19 @@ export default {
     }
     
   },
-   // 验证新密�?  validateNewPassword() {
+   // 验证新密码
+  validateNewPassword() {
     if (!this.pwdForm.newPassword) {
       this.pwdError = ''
       return
     }
     if (this.pwdForm.newPassword.length < 6) {
-      this.pwdError = '新密码长度至�?�?
+      this.pwdError = '新密码长度至少6位'
     } else {
       this.pwdError = ''
     }
-    // 如果确认密码已填，重新验证确认密�?    if (this.pwdForm.confirmPassword) {
+    // 如果确认密码已填，重新验证确认密码
+    if (this.pwdForm.confirmPassword) {
       this.validateConfirmPassword()
     }
   },
@@ -1101,7 +1119,7 @@ export default {
       return
     }
     if (this.pwdForm.newPassword !== this.pwdForm.confirmPassword) {
-      this.confirmPwdError = '两次输入的密码不一�?
+      this.confirmPwdError = '两次输入的密码不一致'
     } else {
       this.confirmPwdError = ''
     }
@@ -1159,7 +1177,7 @@ h2 {
   margin-bottom: 32px;
 }
 
-/* 毛玻璃卡片样�?*/
+/* 毛玻璃卡片样式 */
 .glass-card {
   background: white;
   backdrop-filter: none;
@@ -1269,7 +1287,7 @@ h2 {
   color: #5a6e5c;
 }
 
-/* 二维码区�?*/
+/* 二维码区域 */
 .qrcode-section {
   flex-shrink: 0;
   text-align: center;
@@ -1389,7 +1407,7 @@ h2 {
   transform: translateX(4px);
 }
 
-/* 加载状�?*/
+/* 加载状态 */
 .loading-state {
   text-align: center;
   padding: 40px;
@@ -1755,7 +1773,7 @@ h2 {
   margin-top: 12px;
 }
 
-/* 响应�?*/
+/* 响应式 */
 @media (max-width: 768px) {
   .user-center {
     padding: 20px 16px;
@@ -1859,9 +1877,9 @@ h2 {
   color: #ff9800;
 }
 .modal-body {
-  padding: 32px 32px 24px 32px;  /* �?�?�?左，全部增加�?2px */
+  padding: 32px 32px 24px 32px;  /* 上 右 下 左，全部增加到32px */
 }
-/* 弹窗内表�?*/
+/* 弹窗内表单 */
 .modal-body .form-group {
   margin-bottom: 20px;
 }
