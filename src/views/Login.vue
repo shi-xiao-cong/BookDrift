@@ -83,7 +83,7 @@ export default {
           return;
         }
 
-        const response = await this.$request.post('/users/login', {
+        const response = await this.$request.post('/auth/login', {
           username: this.form.username,
           password: this.form.password
         });

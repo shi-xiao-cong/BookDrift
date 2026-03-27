@@ -204,7 +204,7 @@ export default {
       
       this.loading = true
       try {
-        const response = await this.$request.post('/users/register', {
+        const response = await this.$request.post('/auth/register', {
           studentId: this.form.studentId,
           name: this.form.name,
           phone: this.form.phone,
